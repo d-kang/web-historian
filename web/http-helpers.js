@@ -17,17 +17,33 @@ exports.serveAssets = function(res, asset, callback) {
 };
 
 
-var tempData = [
-  'hi from tempData'
-];
-
+var tempData = [];
 
 // As you progress, keep thinking about what helper functions you can put here!
+
+// in index.html user enters google.com
+// not archived so send to loading page
+// in loading page, user types google.com then servers googles html
+  // enter would trigger post request? so would logic go in post or get?
+// in index.html user types google.com
+// we have google in archive
+  // serve googles html?
+  // this would trigger post request so would logic go in post for serving googles html?
+
 exports.actions = {
   GET: function(request, response) {
     // require headers
-    response.writeHead(200, headers);
-    response.end(JSON.stringify(tempData));
+    var html = '';
+    fs.readFile('./web/public/index.html', function(error, data) {
+      if (error) {
+        console.log(error);
+      }
+      html += data.toString();
+      console.log(typeof html);
+      response.writeHead(200, headers);
+      response.end(html);
+    });
+
   },
   POST: function(request, response) {
     var body = '';
