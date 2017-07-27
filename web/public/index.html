@@ -2,11 +2,35 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
   Enter a URL here:
   <form method="POST">
     <input type="input" name="url"></input>
   </form>
+
+  <script>
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+
+    console.log('hi from form field')
+    var value = $('input').val()
+    console.log(value)
+    $.ajax({
+      method: "POST",
+      url: "http://127.0.0.1:8080/",
+      data: value
+    })
+      .done(function( msg ) {
+       console.log("Data Saved: " + msg + 'Hello From Web Historian')
+      });
+
+
+  })
+
+
+
+  </script>
 </body>
 </html>
