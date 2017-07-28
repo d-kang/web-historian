@@ -48,27 +48,38 @@ exports.actions = {
   POST: function(request, response) {
     var body = '';
     request.on('data', function(chunks) {
-      body += chunks;
+      body += chunks;  // This is converting the buffer chunks from __ to string
+      console.log('chunks', chunks);
     })
       .on('end', function() {
         // may need to parse later if its an obj
-        tempData.push(body);
+        console.log('body', body);
+        // tempData.push(body);
         // put headers later
-        response.writeHead(201, headers);
+        // response.writeHead(201, headers);
         // response.end(body);
+            // Get URL so it is www.google.com (and not url=www.google.com)
+        body = body.replace(/url=/, '');
+        // IF url is in site.txt
+        archive.isUrlInList(body, function(found) {
+          console.log('found: ', found); // true or false
+          if (found) {
+            // Y check if its in the archives/sites folder
+            archive.isUrlArchived(body, function() {
+
+            });
+              // Y redirect client to file //done
+            // N redirect to loading.html
+          } else { // ELSE
+            // add url to site.txt
+            // redirect to loading page
+          }
+
+        });
       });
 
-    //  is in site.txt
-    if (archive.isUrlInList())
-      // Y check if its in the archives/sites folder
-        // Y redirect client to file //done
-      // N redirect to loading.html
-    // EL // ELSE
-      /rl to site.txt
-      // redirect to loading pageng page
-
   },
-  ction(request, response) {
+  OPTIONS: function(request, response) {
     // put headers later
     response.writeHead(200, headers);
     response.end('this is options');

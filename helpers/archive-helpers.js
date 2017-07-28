@@ -60,7 +60,7 @@ exports.isUrlArchived = function(url, callback) {
 exports.downloadUrls = function(urls) {
   // Iterate over urls and pipe to new files
   _.each(urls, function (url) {
-    if (!url) { return; }  // if url is undefined, go to next url
+    if (!url) { return; }  // if url is undefined, go to next url (filter out bad input)
     request('http://' + url).pipe(fs.createWriteStream(exports.paths.archivedSites + '/' + url)); // download website and pipe it to a create stream that save it in archives/sites/websiteURL
   });
 };
