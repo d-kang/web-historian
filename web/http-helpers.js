@@ -23,7 +23,7 @@ var tempData = [];
 
 // in index.html user enters google.com
 // not archived so send to loading page
-// in loading page, user types google.com then servers googles html
+// in loading page, user types google.com then serves googles html
   // enter would trigger post request? so would logic go in post or get?
 // in index.html user types google.com
 // we have google in archive
@@ -55,10 +55,20 @@ exports.actions = {
         tempData.push(body);
         // put headers later
         response.writeHead(201, headers);
-        response.end(body);
+        // response.end(body);
       });
+
+    //  is in site.txt
+    if (archive.isUrlInList())
+      // Y check if its in the archives/sites folder
+        // Y redirect client to file //done
+      // N redirect to loading.html
+    // EL // ELSE
+      /rl to site.txt
+      // redirect to loading pageng page
+
   },
-  OPTIONS: function(request, response) {
+  ction(request, response) {
     // put headers later
     response.writeHead(200, headers);
     response.end('this is options');
